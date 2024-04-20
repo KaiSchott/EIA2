@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einkaufsliste</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="liste">
+        <h1>Einkaufsliste</h1>
+        
+        <form id="addItemForm">
+            <label for="itemName">Name:</label>
+            <input type="text" id="itemName" name="itemName" placeholder="Name des Artikels">
+            <label for="itemQuantity">Menge:</label>
+            <input type="number" id="itemQuantity" name="itemQuantity" placeholder="Anzahl">
+            <label for="lastPurchase">Letzter Kauf:</label>
+            <input type="date" id="lastPurchase" name="lastPurchase">
+            <label for="itemComment">Kommentar:</label>
+            <input type="text" id="itemComment" name="itemComment" placeholder="Kommentar">
+            <button type="submit">Hinzufügen</button>
+        </form>
+       
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Menge</th>
+                    <th>Letzter Kauf</th>
+                    <th>Kommentar</th>
+                    <th>Gekauft</th>
+                    <th>Löschen</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Apfel</td>
+                    <td><input type="number" placeholder="Anzahl"></td>
+                    <td>20-04-2024</td>
+                    <td><input placeholder="weitere Infos"></td>
+                    <td class="checkbox-cell"><input type="checkbox" class="checkbox"></td>
+                    <td class="delete-cell"><button class="delete-button"><img src="delete-icon.png" alt="Löschen"></button></td>
+                </tr>
+                <tr>
+                    <td>Milch</td>
+                    <td><input type="number" placeholder="Anzahl"></td>
+                    <td>21-04-2024</td>
+                    <td><input placeholder="weitere Infos"></td>
+                    <td class="checkbox-cell"><input type="checkbox" class="checkbox"></td>
+                    <td class="delete-cell"><button class="delete-button"><img src="delete-icon.png" alt="Löschen"></button></td>
+                </tr>
+               
+            </tbody>
+        </table>
+    </div>
+    
+   
+    
+</body>
+</html>
