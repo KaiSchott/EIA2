@@ -1,7 +1,8 @@
+"use strict";
 // Warten bis das DOM vollständig geladen ist
 document.addEventListener("DOMContentLoaded", function () {
-    var addItemButton = document.getElementById('newEntryButton'); // Hinzufügen-Button
-    var entriesContainer = document.getElementById('entries'); // Container für Einträge
+    const addItemButton = document.getElementById('newEntryButton'); // Hinzufügen-Button
+    const entriesContainer = document.getElementById('entries'); // Container für Einträge
     // Überprüfen, ob die Elemente gefunden wurden
     if (addItemButton && entriesContainer) {
         // Event-Listener für Klick auf den Hinzufügen-Button hinzufügen
@@ -15,11 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
 function handleAddItemClick(event) {
     event.preventDefault(); // Verhindere das Standardverhalten des Buttons (Seitenneuladen)
     // Erfassen der eingegebenen Informationen aus dem Formular
-    var newItemData = gatherNewItemData();
+    const newItemData = gatherNewItemData();
     // Überprüfen, ob alle erforderlichen Daten erfasst wurden
     if (newItemData.itemName && newItemData.itemQuantity && newItemData.lastPurchase && newItemData.itemComment) {
         // Neuen Eintrag erstellen und zum DOM hinzufügen
-        var newRow = createNewRow(newItemData);
+        const newRow = createNewRow(newItemData);
         appendRowToEntriesContainer(newRow);
         // Formularfelder leeren
         resetAddItemForm();
@@ -30,10 +31,10 @@ function handleAddItemClick(event) {
 }
 // Funktion zum Erfassen der eingegebenen Daten aus dem Formular
 function gatherNewItemData() {
-    var itemNameInput = document.getElementById('itemName').value;
-    var itemQuantityInput = document.getElementById('itemQuantity').value;
-    var lastPurchaseInput = document.getElementById('lastPurchase').value;
-    var itemCommentInput = document.getElementById('itemComment').value;
+    const itemNameInput = document.getElementById('itemName').value;
+    const itemQuantityInput = document.getElementById('itemQuantity').value;
+    const lastPurchaseInput = document.getElementById('lastPurchase').value;
+    const itemCommentInput = document.getElementById('itemComment').value;
     return {
         itemName: itemNameInput,
         itemQuantity: itemQuantityInput,
@@ -43,11 +44,18 @@ function gatherNewItemData() {
 }
 // Funktion zum Erstellen einer neuen Tabellenzeile für einen Eintrag
 function createNewRow(newItemData) {
-    var newRow = document.createElement('tr');
+    const newRow = document.createElement('tr');
     // HTML für die neue Zeile einfügen
-    newRow.innerHTML = "\n      <td>".concat(newItemData.itemName, "</td>\n      <td>").concat(newItemData.itemQuantity, "</td>\n      <td>").concat(newItemData.lastPurchase, "</td>\n      <td>").concat(newItemData.itemComment, "</td>\n      <td class=\"checkbox-cell\"><input type=\"checkbox\" class=\"check\"></td>\n      <td class=\"delete-cell\"><button class=\"delete\">L\u00F6schen</button></td>\n  ");
+    newRow.innerHTML = `
+      <td>${newItemData.itemName}</td>
+      <td>${newItemData.itemQuantity}</td>
+      <td>${newItemData.lastPurchase}</td>
+      <td>${newItemData.itemComment}</td>
+      <td class="checkbox-cell"><input type="checkbox" class="check"></td>
+      <td class="delete-cell"><button class="delete">Löschen</button></td>
+  `;
     // Funktionalität zum Löschen hinzufügen
-    var deleteButton = newRow.querySelector('.delete');
+    const deleteButton = newRow.querySelector('.delete');
     if (deleteButton) {
         deleteButton.addEventListener('click', handleDeleteItemClick);
     }
@@ -58,7 +66,7 @@ function createNewRow(newItemData) {
 }
 // Funktion zum Hinzufügen einer neuen Zeile zum Eintragscontainer im DOM
 function appendRowToEntriesContainer(newRow) {
-    var entriesContainer = document.getElementById('entries');
+    const entriesContainer = document.getElementById('entries');
     if (entriesContainer) {
         entriesContainer.appendChild(newRow);
     }
@@ -68,7 +76,7 @@ function appendRowToEntriesContainer(newRow) {
 }
 // Funktion zum Zurücksetzen der Formularfelder
 function resetAddItemForm() {
-    var addItemForm = document.getElementById('addItemForm');
+    const addItemForm = document.getElementById('addItemForm');
     if (addItemForm) {
         addItemForm.reset();
     }
@@ -78,7 +86,7 @@ function resetAddItemForm() {
 }
 // Funktion zur Behandlung des Klicks auf den Löschen-Button
 function handleDeleteItemClick() {
-    var rowToDelete = this.parentNode.parentNode;
+    const rowToDelete = this.parentNode.parentNode;
     if (rowToDelete) {
         rowToDelete.remove();
     }
@@ -86,3 +94,4 @@ function handleDeleteItemClick() {
         console.error("Zu löschende Zeile nicht gefunden.");
     }
 }
+//# sourceMappingURL=main.js.map
