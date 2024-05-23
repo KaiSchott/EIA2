@@ -1,3 +1,9 @@
+/*
+Aufgabe: L10_EntenteichClasses
+Name: Kai Schott
+
+Hatte hilfe von ChatGPT sonst hätte ich noch viel länger gebracuht oder es garnicht hinbekommen
+*/
 namespace L09_Ententeich {
     window.addEventListener("load", handleLoad);
     let crc2: CanvasRenderingContext2D;
