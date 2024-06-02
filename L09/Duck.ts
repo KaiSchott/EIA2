@@ -1,12 +1,11 @@
-namespace L09_Ententeich {
-    export class Duck {
-        private position: { x: number, y: number };
-        private velocity: { x: number, y: number };
+/// <reference path="Moveable.ts" />
+
+namespace L10_EntenteichClasses {
+    export class Duck extends Moveable {
         private pondArea: { x: number, y: number, width: number, height: number };
 
         constructor(initialPosition: { x: number, y: number }, pondArea: { x: number, y: number, width: number, height: number }) {
-            this.position = initialPosition;
-            this.velocity = { x: (Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2 };
+            super(initialPosition, { x: (Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2 });
             this.pondArea = {
                 x: pondArea.x + 50,
                 y: pondArea.y + 50,
@@ -15,7 +14,7 @@ namespace L09_Ententeich {
             };
         }
 
-        public draw(crc2: CanvasRenderingContext2D): void {
+        draw(crc2: CanvasRenderingContext2D): void {
             // Körper der Ente
             crc2.fillStyle = "rgb(255, 223, 186)"; // Helleres Orange
             crc2.beginPath();
@@ -52,6 +51,10 @@ namespace L09_Ententeich {
             crc2.closePath();
             crc2.fill();
 
+            this.updatePosition();
+        }
+
+        move(canvas: HTMLCanvasElement, horizon: number): void {
             this.updatePosition();
         }
 

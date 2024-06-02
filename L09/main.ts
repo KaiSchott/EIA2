@@ -1,17 +1,9 @@
-/*
-Aufgabe: L10_EntenteichClasses
-Name: Kai Schott
-
-Hatte hilfe von ChatGPT sonst hätte ich noch viel länger gebracuht oder es garnicht hinbekommen
-*/
-namespace L09_Ententeich {
+namespace L10_EntenteichClasses {
     window.addEventListener("load", handleLoad);
     let crc2: CanvasRenderingContext2D;
     let line = 0.46;
     let canvas: HTMLCanvasElement;
-    let clouds: Cloud[] = [];
-    let ducks: Duck[] = [];
-    let dragonflies: Dragonfly[] = [];
+    let moveables: Moveable[] = [];
     let horizon: number;
     const numberOfDucks = 10;
     const numberOfDragonflies = 5;
@@ -160,9 +152,9 @@ namespace L09_Ententeich {
     }
 
     function createClouds(): void {
-        clouds.push(new Cloud({ x: 200, y: 150 }, { x: 250, y: 75 }, 1));
-        clouds.push(new Cloud({ x: 500, y: 100 }, { x: 200, y: 50 }, 0.5));
-        clouds.push(new Cloud({ x: 800, y: 200 }, { x: 150, y: 100 }, 2));
+        moveables.push(new Cloud({ x: 200, y: 150 }, { x: 250, y: 75 }, 1));
+        moveables.push(new Cloud({ x: 500, y: 100 }, { x: 200, y: 50 }, 0.5));
+        moveables.push(new Cloud({ x: 800, y: 200 }, { x: 150, y: 100 }, 2));
     }
 
     function createDucks(count: number): void {
@@ -176,7 +168,7 @@ namespace L09_Ententeich {
         for (let i = 0; i < count; i++) {
             let randomX = pondArea.x + Math.random() * pondArea.width;
             let randomY = pondArea.y + Math.random() * pondArea.height;
-            ducks.push(new Duck({ x: randomX, y: randomY }, pondArea));
+            moveables.push(new Duck({ x: randomX, y: randomY }, pondArea));
         }
     }
 
@@ -184,7 +176,7 @@ namespace L09_Ententeich {
         for (let i = 0; i < count; i++) {
             let randomX = Math.random() * canvas.width;
             let randomY = Math.random() * horizon;
-            dragonflies.push(new Dragonfly({ x: randomX, y: randomY }));
+            moveables.push(new Dragonfly({ x: randomX, y: randomY }));
         }
     }
 
@@ -198,18 +190,9 @@ namespace L09_Ententeich {
             drawLake();
             drawAdditionalTrees();
 
-            for (let cloud of clouds) {
-                cloud.move(canvas);
-                cloud.draw(crc2);
-            }
-
-            for (let duck of ducks) {
-                duck.draw(crc2);
-            }
-
-            for (let dragonfly of dragonflies) {
-                dragonfly.draw(crc2);
-                dragonfly.updatePosition(canvas, horizon);
+            for (let moveable of moveables) {
+                moveable.move(canvas, horizon);
+                moveable.draw(crc2);
             }
 
             requestAnimationFrame(frame);

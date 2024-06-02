@@ -1,13 +1,12 @@
-"use strict";
+/// <reference path="Moveable.ts" />
 
-namespace L09_Ententeich {
-    export class Cloud {
-        position: { x: number; y: number };
-        size: { x: number; y: number };
-        speed: number;
+namespace L10_EntenteichClasses {
+    export class Cloud extends Moveable {
+        private size: { x: number, y: number };
+        private speed: number;
 
-        constructor(_position: { x: number; y: number }, _size: { x: number; y: number }, _speed: number) {
-            this.position = _position;
+        constructor(_position: { x: number, y: number }, _size: { x: number, y: number }, _speed: number) {
+            super(_position, { x: _speed, y: 0 });
             this.size = _size;
             this.speed = _speed;
         }

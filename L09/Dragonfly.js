@@ -1,12 +1,10 @@
 "use strict";
-var L09_Ententeich;
-(function (L09_Ententeich) {
-    class Dragonfly {
-        position;
-        velocity;
+/// <reference path="Moveable.ts" />
+var L10_EntenteichClasses;
+(function (L10_EntenteichClasses) {
+    class Dragonfly extends L10_EntenteichClasses.Moveable {
         constructor(initialPosition) {
-            this.position = initialPosition;
-            this.velocity = { x: (Math.random() - 0.5) * 4, y: (Math.random() - 0.5) * 4 };
+            super(initialPosition, { x: (Math.random() - 0.5) * 4, y: (Math.random() - 0.5) * 4 });
         }
         draw(crc2) {
             crc2.fillStyle = "rgb(0, 0, 0)";
@@ -34,7 +32,7 @@ var L09_Ententeich;
             crc2.ellipse(this.position.x - 5, this.position.y, 20, 5, Math.PI / 4, 0, 2 * Math.PI);
             crc2.fill();
         }
-        updatePosition(canvas, horizon) {
+        move(canvas, horizon) {
             this.position.x += this.velocity.x;
             this.position.y += this.velocity.y;
             if (this.position.x < 0 || this.position.x > canvas.width) {
@@ -45,6 +43,6 @@ var L09_Ententeich;
             }
         }
     }
-    L09_Ententeich.Dragonfly = Dragonfly;
-})(L09_Ententeich || (L09_Ententeich = {}));
+    L10_EntenteichClasses.Dragonfly = Dragonfly;
+})(L10_EntenteichClasses || (L10_EntenteichClasses = {}));
 //# sourceMappingURL=Dragonfly.js.map

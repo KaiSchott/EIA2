@@ -1,12 +1,12 @@
 "use strict";
-var L09_Ententeich;
-(function (L09_Ententeich) {
-    class Cloud {
-        position;
+/// <reference path="Moveable.ts" />
+var L10_EntenteichClasses;
+(function (L10_EntenteichClasses) {
+    class Cloud extends L10_EntenteichClasses.Moveable {
         size;
         speed;
         constructor(_position, _size, _speed) {
-            this.position = _position;
+            super(_position, { x: _speed, y: 0 });
             this.size = _size;
             this.speed = _speed;
         }
@@ -38,6 +38,6 @@ var L09_Ententeich;
             }
         }
     }
-    L09_Ententeich.Cloud = Cloud;
-})(L09_Ententeich || (L09_Ententeich = {}));
+    L10_EntenteichClasses.Cloud = Cloud;
+})(L10_EntenteichClasses || (L10_EntenteichClasses = {}));
 //# sourceMappingURL=cloud.js.map

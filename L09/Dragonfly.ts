@@ -1,14 +1,12 @@
-namespace L09_Ententeich {
-    export class Dragonfly {
-        private position: { x: number, y: number };
-        private velocity: { x: number, y: number };
+/// <reference path="Moveable.ts" />
 
+namespace L10_EntenteichClasses {
+    export class Dragonfly extends Moveable {
         constructor(initialPosition: { x: number, y: number }) {
-            this.position = initialPosition;
-            this.velocity = { x: (Math.random() - 0.5) * 4, y: (Math.random() - 0.5) * 4 };
+            super(initialPosition, { x: (Math.random() - 0.5) * 4, y: (Math.random() - 0.5) * 4 });
         }
 
-        public draw(crc2: CanvasRenderingContext2D): void {
+        draw(crc2: CanvasRenderingContext2D): void {
             crc2.fillStyle = "rgb(0, 0, 0)";
             
             // Draw body
@@ -41,7 +39,7 @@ namespace L09_Ententeich {
             crc2.fill();
         }
 
-        public updatePosition(canvas: HTMLCanvasElement, horizon: number): void {
+        move(canvas: HTMLCanvasElement, horizon: number): void {
             this.position.x += this.velocity.x;
             this.position.y += this.velocity.y;
 

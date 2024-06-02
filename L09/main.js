@@ -1,13 +1,11 @@
 "use strict";
-var L09_Ententeich;
-(function (L09_Ententeich) {
+var L10_EntenteichClasses;
+(function (L10_EntenteichClasses) {
     window.addEventListener("load", handleLoad);
     let crc2;
     let line = 0.46;
     let canvas;
-    let clouds = [];
-    let ducks = [];
-    let dragonflies = [];
+    let moveables = [];
     let horizon;
     const numberOfDucks = 10;
     const numberOfDragonflies = 5;
@@ -143,9 +141,9 @@ var L09_Ententeich;
         crc2.fill();
     }
     function createClouds() {
-        clouds.push(new L09_Ententeich.Cloud({ x: 200, y: 150 }, { x: 250, y: 75 }, 1));
-        clouds.push(new L09_Ententeich.Cloud({ x: 500, y: 100 }, { x: 200, y: 50 }, 0.5));
-        clouds.push(new L09_Ententeich.Cloud({ x: 800, y: 200 }, { x: 150, y: 100 }, 2));
+        moveables.push(new L10_EntenteichClasses.Cloud({ x: 200, y: 150 }, { x: 250, y: 75 }, 1));
+        moveables.push(new L10_EntenteichClasses.Cloud({ x: 500, y: 100 }, { x: 200, y: 50 }, 0.5));
+        moveables.push(new L10_EntenteichClasses.Cloud({ x: 800, y: 200 }, { x: 150, y: 100 }, 2));
     }
     function createDucks(count) {
         let pondArea = {
@@ -157,14 +155,14 @@ var L09_Ententeich;
         for (let i = 0; i < count; i++) {
             let randomX = pondArea.x + Math.random() * pondArea.width;
             let randomY = pondArea.y + Math.random() * pondArea.height;
-            ducks.push(new L09_Ententeich.Duck({ x: randomX, y: randomY }, pondArea));
+            moveables.push(new L10_EntenteichClasses.Duck({ x: randomX, y: randomY }, pondArea));
         }
     }
     function createDragonflies(count) {
         for (let i = 0; i < count; i++) {
             let randomX = Math.random() * canvas.width;
             let randomY = Math.random() * horizon;
-            dragonflies.push(new L09_Ententeich.Dragonfly({ x: randomX, y: randomY }));
+            moveables.push(new L10_EntenteichClasses.Dragonfly({ x: randomX, y: randomY }));
         }
     }
     function animate() {
@@ -176,20 +174,13 @@ var L09_Ententeich;
             drawGrass();
             drawLake();
             drawAdditionalTrees();
-            for (let cloud of clouds) {
-                cloud.move(canvas);
-                cloud.draw(crc2);
-            }
-            for (let duck of ducks) {
-                duck.draw(crc2);
-            }
-            for (let dragonfly of dragonflies) {
-                dragonfly.draw(crc2);
-                dragonfly.updatePosition(canvas, horizon);
+            for (let moveable of moveables) {
+                moveable.move(canvas, horizon);
+                moveable.draw(crc2);
             }
             requestAnimationFrame(frame);
         }
         frame();
     }
-})(L09_Ententeich || (L09_Ententeich = {}));
+})(L10_EntenteichClasses || (L10_EntenteichClasses = {}));
 //# sourceMappingURL=main.js.map

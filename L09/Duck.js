@@ -1,13 +1,11 @@
 "use strict";
-var L09_Ententeich;
-(function (L09_Ententeich) {
-    class Duck {
-        position;
-        velocity;
+/// <reference path="Moveable.ts" />
+var L10_EntenteichClasses;
+(function (L10_EntenteichClasses) {
+    class Duck extends L10_EntenteichClasses.Moveable {
         pondArea;
         constructor(initialPosition, pondArea) {
-            this.position = initialPosition;
-            this.velocity = { x: (Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2 };
+            super(initialPosition, { x: (Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2 });
             this.pondArea = {
                 x: pondArea.x + 50,
                 y: pondArea.y + 50,
@@ -49,6 +47,9 @@ var L09_Ententeich;
             crc2.fill();
             this.updatePosition();
         }
+        move(canvas, horizon) {
+            this.updatePosition();
+        }
         updatePosition() {
             this.position.x += this.velocity.x;
             this.position.y += this.velocity.y;
@@ -60,6 +61,6 @@ var L09_Ententeich;
             }
         }
     }
-    L09_Ententeich.Duck = Duck;
-})(L09_Ententeich || (L09_Ententeich = {}));
+    L10_EntenteichClasses.Duck = Duck;
+})(L10_EntenteichClasses || (L10_EntenteichClasses = {}));
 //# sourceMappingURL=Duck.js.map
