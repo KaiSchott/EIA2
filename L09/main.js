@@ -2,6 +2,10 @@
 var L10_EntenteichClasses;
 (function (L10_EntenteichClasses) {
     window.addEventListener("load", handleLoad);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("click", (event) => handleMouseClick(event, canvas));
+    window.addEventListener("keydown", handleKeyDown);
+    document.getElementById("addDuckButton")?.addEventListener("click", addNewDuck);
     let crc2;
     let line = 0.46;
     let canvas;
@@ -33,6 +37,41 @@ var L10_EntenteichClasses;
         drawLake();
         drawAdditionalTrees();
         animate();
+    }
+    function handleMouseClick(event, canvas) {
+        for (let moveable of moveables) {
+            if (moveable instanceof L10_EntenteichClasses.Duck) {
+                moveable.handleClick(event, canvas);
+            }
+        }
+    }
+    function handleMouseMove(event) {
+        let rect = canvas.getBoundingClientRect();
+        let mouseX = event.clientX - rect.left;
+        let mouseY = event.clientY - rect.top;
+        for (let moveable of moveables) {
+            if (moveable instanceof L10_EntenteichClasses.Duck) {
+                moveable.followMouse(mouseX, mouseY);
+            }
+        }
+    }
+    function handleKeyDown(event) {
+        for (let moveable of moveables) {
+            if (moveable instanceof L10_EntenteichClasses.Dragonfly) {
+                moveable.changeDirection(event.key);
+            }
+        }
+    }
+    function addNewDuck() {
+        let pondArea = {
+            x: crc2.canvas.width / 2 - 600,
+            y: crc2.canvas.height * 0.6,
+            width: 1200,
+            height: 200
+        };
+        let randomX = pondArea.x + Math.random() * pondArea.width;
+        let randomY = pondArea.y + Math.random() * pondArea.height;
+        moveables.push(new L10_EntenteichClasses.Duck({ x: randomX, y: randomY }, pondArea));
     }
     function drawBackground() {
         let gradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
@@ -176,6 +215,8 @@ var L10_EntenteichClasses;
             drawAdditionalTrees();
             for (let moveable of moveables) {
                 moveable.move(canvas, horizon);
+                if (moveable instanceof L10_EntenteichClasses.Duck && !moveable.isVisible)
+                    continue;
                 moveable.draw(crc2);
             }
             requestAnimationFrame(frame);
@@ -183,4 +224,7 @@ var L10_EntenteichClasses;
         frame();
     }
 })(L10_EntenteichClasses || (L10_EntenteichClasses = {}));
+/// <reference path="Moveable.ts" />
+/// <reference path="Duck.ts" />
+/// <reference path="Dragonfly.ts" />
 //# sourceMappingURL=main.js.map

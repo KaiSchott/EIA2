@@ -50,5 +50,23 @@ namespace L10_EntenteichClasses {
                 this.velocity.y *= -1;
             }
         }
+
+        changeDirection(direction: string): void {
+            const speed = 2;
+            switch (direction) {
+                case "ArrowUp":
+                    this.velocity.y = -speed;
+                    break;
+                case "ArrowDown":
+                    this.velocity.y = speed;
+                    break;
+                case "ArrowLeft":
+                    this.velocity.x = -speed;
+                    break;
+                case "ArrowRight":
+                    this.velocity.x = speed;
+                    break;
+            }
+        }
     }
 }

@@ -1,5 +1,10 @@
 namespace L10_EntenteichClasses {
     window.addEventListener("load", handleLoad);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("click", (event) => handleMouseClick(event, canvas));
+    window.addEventListener("keydown", handleKeyDown);
+    document.getElementById("addDuckButton")?.addEventListener("click", addNewDuck);
+
     let crc2: CanvasRenderingContext2D;
     let line = 0.46;
     let canvas: HTMLCanvasElement;
@@ -32,6 +37,45 @@ namespace L10_EntenteichClasses {
         drawLake();
         drawAdditionalTrees();
         animate();
+    }
+
+    function handleMouseClick(event: MouseEvent, canvas: HTMLCanvasElement): void {
+        for (let moveable of moveables) {
+            if (moveable instanceof Duck) {
+                moveable.handleClick(event, canvas);
+            }
+        }
+    }
+
+    function handleMouseMove(event: MouseEvent): void {
+        let rect = canvas.getBoundingClientRect();
+        let mouseX = event.clientX - rect.left;
+        let mouseY = event.clientY - rect.top;
+        for (let moveable of moveables) {
+            if (moveable instanceof Duck) {
+                moveable.followMouse(mouseX, mouseY);
+            }
+        }
+    }
+
+    function handleKeyDown(event: KeyboardEvent): void {
+        for (let moveable of moveables) {
+            if (moveable instanceof Dragonfly) {
+                moveable.changeDirection(event.key);
+            }
+        }
+    }
+
+    function addNewDuck(): void {
+        let pondArea = {
+            x: crc2.canvas.width / 2 - 600,
+            y: crc2.canvas.height * 0.6,
+            width: 1200,
+            height: 200
+        };
+        let randomX = pondArea.x + Math.random() * pondArea.width;
+        let randomY = pondArea.y + Math.random() * pondArea.height;
+        moveables.push(new Duck({ x: randomX, y: randomY }, pondArea));
     }
 
     function drawBackground(): void {
@@ -192,6 +236,7 @@ namespace L10_EntenteichClasses {
 
             for (let moveable of moveables) {
                 moveable.move(canvas, horizon);
+                if (moveable instanceof Duck && !moveable.isVisible) continue;
                 moveable.draw(crc2);
             }
 
@@ -200,3 +245,6 @@ namespace L10_EntenteichClasses {
         frame();
     }
 }
+/// <reference path="Moveable.ts" />
+/// <reference path="Duck.ts" />
+/// <reference path="Dragonfly.ts" />

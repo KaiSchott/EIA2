@@ -4,9 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ententeich</title>
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            font-family: Arial, sans-serif;
+        }
+        canvas { 
+            display: block; 
+        }
+        #addDuckButton { 
+            position: absolute; 
+            top: 10px; 
+            left: 10px; 
+            z-index: 10; 
+            padding: 15px 30px; 
+            font-size: 18px; 
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #addDuckButton:hover {
+            background-color: #45a049;
+        }
+        #addDuckButton:active {
+            transform: translateY(2px);
+        }
+    </style>
 </head>
 <body>
     <canvas></canvas>
+    <button id="addDuckButton">Add Duck</button>
     <script src="Moveable.js"></script>
     <script src="Cloud.js"></script>
     <script src="Duck.js"></script>
