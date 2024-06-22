@@ -50,7 +50,7 @@ var L10_EntenteichClasses;
             crc2.fill();
             this.updatePosition();
         }
-        move(canvas, horizon) {
+        move(canvas) {
             this.updatePosition();
         }
         handleClick(event, canvas) {
@@ -65,7 +65,7 @@ var L10_EntenteichClasses;
             let dx = mouseX - this.position.x;
             let dy = mouseY - this.position.y;
             let distance = Math.sqrt(dx * dx + dy * dy);
-            return distance < 35; // radius of the duck body
+            return distance < 35; // Radius des Entenkörpers
         }
         updatePosition() {
             this.position.x += this.velocity.x;

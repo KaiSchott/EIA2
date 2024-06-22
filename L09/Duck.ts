@@ -56,7 +56,7 @@ namespace L10_EntenteichClasses {
             this.updatePosition();
         }
 
-        move(canvas: HTMLCanvasElement, horizon: number): void {
+        move(canvas: HTMLCanvasElement): void {  // 'horizon' entfernt
             this.updatePosition();
         }
 
@@ -73,7 +73,7 @@ namespace L10_EntenteichClasses {
             let dx = mouseX - this.position.x;
             let dy = mouseY - this.position.y;
             let distance = Math.sqrt(dx * dx + dy * dy);
-            return distance < 35; // radius of the duck body
+            return distance < 35; // Radius des Entenkörpers
         }
 
         private updatePosition(): void {
